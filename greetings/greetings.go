@@ -3,6 +3,8 @@ package greetings
 import (
 	"errors"
 	"fmt"
+	"math/rand"
+	"time"
 )
 
 func Hello(name string) (string, error) {
@@ -12,7 +14,21 @@ func Hello(name string) (string, error) {
 	}
 
 	// if name received, return a value
-	message := fmt.Sprintf("Hi, %v. Welcome!", name)
+	message := fmt.Sprintf(randomFormat(), name)
 
 	return message, nil
+}
+
+func init() {
+	rand.NewSource(time.Now().UnixNano())
+}
+
+func randomFormat() string {
+	formats := []string{
+		"Hi, %v. Welcome!",
+		"Great to see you, %v!",
+		"Hail, %v! Well met!",
+	}
+
+	return formats[rand.Intn(len(formats))]
 }
