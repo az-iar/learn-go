@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"github.com/go-faker/faker/v4"
 	"github.com/go-sql-driver/mysql"
 	"log"
 	"os"
@@ -64,6 +65,13 @@ func main() {
 	}
 
 	fmt.Printf("ID of added album: %v\n", albID)
+
+	// Add using faker
+	addAlbum(Album{
+		Title:  faker.Sentence(),
+		Artist: faker.Name(),
+		Price:  49.99,
+	})
 }
 
 func albumsByArtist(name string) ([]Album, error) {
